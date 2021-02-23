@@ -15,7 +15,7 @@ function register() {
   usbDetect.on("add", (device) => {
     if (process.argv[2] === "register") {
       const pw = makeUniqueId(device);
-      fs.writeFileSync(__dirname + "/pw.txt", pw);
+      fs.writeFileSync(__dirname + "/pw.txt", pw, { flag: "a" });
       usbDetect.stopMonitoring();
       process.exit(0);
       return;
