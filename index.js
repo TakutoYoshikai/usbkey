@@ -11,16 +11,16 @@ function makeUniqueId(device) {
   return makeHash(device.deviceName + ":" + device.manufacturer + ":" + device.serialNumber);
 }
 
-function register() {
+function register(pwPath) {
   usbDetect.on("add", (device) => {
     if (process.argv[2] === "register") {
       const pw = makeUniqueId(device);
-      fs.writeFileSync(__dirname + "/pw.txt", pw, { flag: "w" });
+      fs.writeFileSync(pwPath, pw, { flag: "w" });
       usbDetect.stopMonitoring();
       process.exit(0);
       return;
     }
-    const pw = fs.readFileSync(__dirname + "/pw.txt", "utf8").slice(0, 64);
+    const pw = fs.readFileSync(pwPath, "utf8").slice(0, 64);
     const id = makeUniqueId(device); 
     if (pw === id) {
       execSync("/home/lucky/tbin/tsys on");
@@ -28,9 +28,9 @@ function register() {
   });
   usbDetect.startMonitoring();
 }
-function run(events) {
+function run(pwPath, events) {
   usbDetect.on("add", (device) => {
-    const pw = fs.readFileSync(__dirname + "/pw.txt", "utf8").slice(0, 64);
+    const pw = fs.readFileSync(pwPath, "utf8").slice(0, 64);
     const id = makeUniqueId(device); 
     if (pw === id) {
       execSync(events.add);
@@ -38,7 +38,7 @@ function run(events) {
   });
 
   usbDetect.on("remove", (device) => {
-    let pw = fs.readFileSync(__dirname + "/pw.txt", "utf8").slice(0, 64);
+    let pw = fs.readFileSync(pwPath, "utf8").slice(0, 64);
     const id = makeUniqueId(device); 
     if (pw === id) {
       execSync(events.remove);
