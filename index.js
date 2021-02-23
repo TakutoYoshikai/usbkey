@@ -13,18 +13,10 @@ function makeUniqueId(device) {
 
 function register(pwPath) {
   usbDetect.on("add", (device) => {
-    if (process.argv[2] === "register") {
       const pw = makeUniqueId(device);
       fs.writeFileSync(pwPath, pw, { flag: "w" });
       usbDetect.stopMonitoring();
       process.exit(0);
-      return;
-    }
-    const pw = fs.readFileSync(pwPath, "utf8").slice(0, 64);
-    const id = makeUniqueId(device); 
-    if (pw === id) {
-      execSync("/home/lucky/tbin/tsys on");
-    }
   });
   usbDetect.startMonitoring();
 }
