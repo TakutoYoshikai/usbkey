@@ -1,5 +1,5 @@
 # usbkey
-usbkey is event runner by specific USB device.
+usbkey is an event runner by specific USB device.
 
 ### Usage
 **install**
