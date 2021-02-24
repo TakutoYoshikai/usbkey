@@ -1,6 +1,5 @@
 const usbDetect = require("usb-detection");
 const fs = require("fs");
-const execSync = require("child_process").execSync;
 const crypto = require("crypto");
 
 function makeHash(id) {
@@ -25,7 +24,7 @@ function run(pwPath, events) {
     const pw = fs.readFileSync(pwPath, "utf8").slice(0, 64);
     const id = makeUniqueId(device); 
     if (pw === id) {
-      execSync(events.add);
+      events.add();
     }
   });
 
@@ -33,7 +32,7 @@ function run(pwPath, events) {
     let pw = fs.readFileSync(pwPath, "utf8").slice(0, 64);
     const id = makeUniqueId(device); 
     if (pw === id) {
-      execSync(events.remove);
+      events.remove();
     }
   });
   usbDetect.startMonitoring();
