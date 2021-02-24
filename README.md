@@ -1,5 +1,5 @@
 # usbkey
-usbkey is a shell command executer by specific usb device.
+usbkey is event runner by specific USB device.
 
 ### Usage
 **install**
@@ -13,9 +13,9 @@ const usbkey = require("usbkey");
 usbkey.register("/path/to/password-file"); //register key
 
 //observe usb device
-usbkey.run("/path/to/password-file", {
-  add: "shell command when key is inserted",
-  remove: "shell command when key is removed",
+usbkey.observe("/path/to/password-file", {
+  add: function() {},
+  remove: function() {},
 });
 ```
 
