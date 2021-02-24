@@ -1,5 +1,5 @@
 # usbkey
-usbkey is an shell command executer by specific usb device.
+usbkey is a shell command executer by specific usb device.
 
 ### Usage
 **install**
