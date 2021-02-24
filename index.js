@@ -19,7 +19,7 @@ function register(pwPath) {
   });
   usbDetect.startMonitoring();
 }
-function run(pwPath, events) {
+function observe(pwPath, events) {
   usbDetect.on("add", (device) => {
     const pw = fs.readFileSync(pwPath, "utf8").slice(0, 64);
     const id = makeUniqueId(device); 
@@ -39,6 +39,6 @@ function run(pwPath, events) {
 }
 
 module.exports = {
-  run,
+  observe,
   register,
 }
