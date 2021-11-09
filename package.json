@@ -12,5 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "usb-detection": "^4.10.0"
+  },
+  "bin": {
+    "usbkey-register": "./register.js"
   }
 }
