@@ -20,8 +20,8 @@ function register(pwPath) {
   usbDetect.startMonitoring();
 }
 function observe(pwPath, events) {
+  const pw = fs.readFileSync(pwPath, "utf8").slice(0, 64);
   usbDetect.on("add", (device) => {
-    const pw = fs.readFileSync(pwPath, "utf8").slice(0, 64);
     const id = makeUniqueId(device); 
     if (pw === id) {
       events.add();
@@ -29,7 +29,6 @@ function observe(pwPath, events) {
   });
 
   usbDetect.on("remove", (device) => {
-    let pw = fs.readFileSync(pwPath, "utf8").slice(0, 64);
     const id = makeUniqueId(device); 
     if (pw === id) {
       events.remove();
