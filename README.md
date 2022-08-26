@@ -11,9 +11,9 @@ npm install --save TakutoYoshikai/usbkey
 
 #### Register USB device
 
-```javascript
-const usbkey = require("usbkey");
-usbkey.register("/path/to/password-file"); //register key
+```bash
+usbkey-register
+# insert USB device, then ./usbkey is generated.
 ```
 
 
@@ -22,7 +22,7 @@ usbkey.register("/path/to/password-file"); //register key
 ```javascript
 const usbkey = require("usbkey");
 //observe usb device
-usbkey.observe("/path/to/password-file", {
+usbkey.observe("./usbkey", {
   add: function() {},
   remove: function() {},
 });
